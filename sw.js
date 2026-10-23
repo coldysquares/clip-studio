@@ -1,5 +1,5 @@
 
-const CACHE = "clip-studio-v1";
+const CACHE = "clipwave-studio-v1";
 const SHELL = [
   "./",
   "./index.html",
