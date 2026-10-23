@@ -1,5 +1,5 @@
-
 <!doctype html>
+
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -8,114 +8,115 @@
 <meta name="description" content="Trim audio into short clips and create reactive visualizer videos.">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
-<title>Clip Studio</title>
+<title>Clipwave Studio</title>
 <style>
 :root {
-  color-scheme:dark;
+  color-scheme: dark;
   --bg:#0a0b10; --panel:#12141d; --panel2:#191c28;
   --line:#292d3b; --text:#f4f5fb; --muted:#969db1;
   --cyan:#65f4ed; --pink:#ff6b9c; --radius:18px;
 }
-* {box-sizing:border-box}
+* { box-sizing:border-box; }
 body {
-  margin:0; background:
-    radial-gradient(ellipse at 10% 0%,#173039 0,transparent 38%),
-    var(--bg); color:var(--text);
+  margin:0;
+  background:radial-gradient(ellipse at 10% 0%,#173039 0,transparent 38%),var(--bg);
+  color:var(--text);
   font:15px/1.5 ui-sans-serif,system-ui,-apple-system,sans-serif;
 }
-button,input,select {font:inherit}
-button,select,input[type=text] {border-radius:10px}
+button,input,select { font:inherit; }
+button,select,input[type=text] { border-radius:10px; }
 button {
   border:1px solid var(--line); padding:10px 14px;
   color:var(--text); background:var(--panel2); cursor:pointer;
   transition:border-color .15s,transform .15s;
 }
-button:hover:not(:disabled) {border-color:var(--cyan)}
-button:active:not(:disabled) {transform:scale(.98)}
-button:disabled {opacity:.4;cursor:not-allowed}
-button.primary {background:var(--cyan);color:#071414;border-color:var(--cyan);font-weight:750}
-button.selected {background:#243a40;border-color:var(--cyan);color:var(--cyan)}
-button.quiet {background:transparent}
+button:hover:not(:disabled) { border-color:var(--cyan); }
+button:active:not(:disabled) { transform:scale(.98); }
+button:disabled { opacity:.4; cursor:not-allowed; }
+button.primary { background:var(--cyan); color:#071414; border-color:var(--cyan); font-weight:750; }
+button.selected { background:#243a40; border-color:var(--cyan); color:var(--cyan); }
+button.quiet { background:transparent; }
 input[type=text],select {
-  width:100%;min-width:0;padding:11px 12px;
-  color:var(--text);background:#0b0d14;border:1px solid var(--line);
+  width:100%; min-width:0; padding:11px 12px;
+  color:var(--text); background:#0b0d14; border:1px solid var(--line);
 }
-input[type=range] {width:100%;accent-color:var(--cyan);cursor:pointer}
-label {display:block;color:var(--muted);font-size:12px;margin-bottom:7px}
+input[type=range] { width:100%; accent-color:var(--cyan); cursor:pointer; }
+label { display:block; color:var(--muted); font-size:12px; margin-bottom:7px; }
 button:focus-visible,input:focus-visible,select:focus-visible {
-  outline:2px solid var(--cyan);outline-offset:3px
+  outline:2px solid var(--cyan); outline-offset:3px;
 }
-.app {max-width:1120px;margin:auto;padding:26px 22px 48px}
-.topbar {display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:26px}
-.brand {display:flex;align-items:center;gap:12px}
+.app { max-width:1120px; margin:auto; padding:26px 22px 48px; }
+.topbar { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:26px; }
+.brand { display:flex; align-items:center; gap:12px; }
 .logo {
-  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;
-  color:var(--cyan);font-size:22px;font-weight:900;
+  width:44px; height:44px; border-radius:14px; display:grid; place-items:center;
+  color:var(--cyan); font-size:22px; font-weight:900;
   background:linear-gradient(145deg,#20383e,#181927);
   border:1px solid #355057;
 }
-h1 {font-size:22px;letter-spacing:-.7px;margin:0}
-.subtitle {font-size:12px;color:var(--muted)}
-.top-actions,.actions,.segmented {display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.eyebrow {font-size:11px;color:var(--cyan);letter-spacing:1.8px;text-transform:uppercase;font-weight:800}
-.hero {margin:10px 0 22px}
-.hero h2 {font-size:clamp(26px,4vw,42px);line-height:1.1;letter-spacing:-1.5px;margin:8px 0}
-.hero p {color:var(--muted);margin:8px 0 0;max-width:650px}
-.layout {display:grid;grid-template-columns:minmax(0,1.55fr) minmax(270px,.8fr);gap:16px;align-items:start}
-.stack {display:grid;gap:16px}
+h1 { font-size:22px; letter-spacing:-.7px; margin:0; }
+.subtitle { font-size:12px; color:var(--muted); }
+.top-actions,.actions,.segmented { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+.eyebrow { font-size:11px; color:var(--cyan); letter-spacing:1.8px; text-transform:uppercase; font-weight:800; }
+.hero { margin:10px 0 22px; }
+.hero h2 { font-size:clamp(26px,4vw,42px); line-height:1.1; letter-spacing:-1.5px; margin:8px 0; }
+.hero p { color:var(--muted); margin:8px 0 0; max-width:650px; }
+.layout { display:grid; grid-template-columns:minmax(0,1.55fr) minmax(270px,.8fr); gap:16px; align-items:start; }
+.stack { display:grid; gap:16px; }
 .card {
-  min-width:0;background:linear-gradient(160deg,#151823,#10121a);
-  border:1px solid var(--line);border-radius:var(--radius);padding:19px;
+  min-width:0; background:linear-gradient(160deg,#151823,#10121a);
+  border:1px solid var(--line); border-radius:var(--radius); padding:19px;
   box-shadow:0 15px 40px #00000015;
 }
-.card-head {display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px}
-.card h3 {font-size:14px;margin:0;font-weight:750}
-.muted {color:var(--muted)}
-.small {font-size:12px}
+.card-head { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:16px; }
+.card h3 { font-size:14px; margin:0; font-weight:750; }
+.muted { color:var(--muted); }
+.small { font-size:12px; }
 .pill {
-  display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);
-  background:#0c0e15;color:var(--muted);padding:5px 9px;border-radius:99px;font-size:11px;
+  display:inline-flex; align-items:center; gap:7px; border:1px solid var(--line);
+  background:#0c0e15; color:var(--muted); padding:5px 9px; border-radius:99px; font-size:11px;
 }
-.dot {width:6px;height:6px;border-radius:50%;background:var(--cyan)}
+.dot { width:6px; height:6px; border-radius:50%; background:var(--cyan); }
 .drop {
-  border:1px dashed #42495d;background:#0c0f17;border-radius:13px;
-  padding:20px 14px;text-align:center;cursor:pointer;
+  border:1px dashed #42495d; background:#0c0f17; border-radius:13px;
+  padding:20px 14px; text-align:center; cursor:pointer;
 }
-.drop:hover,.drop.drag {border-color:var(--cyan);background:#102025}
-.drop strong {display:block;font-size:14px}
-.drop input {width:100%;max-width:260px;margin-top:12px;font-size:12px}
-.wave-wrap {margin-top:16px;background:#090b11;border:1px solid var(--line);border-radius:12px;overflow:hidden}
-#wave {display:block;width:100%;height:130px;touch-action:pan-y;cursor:crosshair}
-.times {display:flex;justify-content:space-between;gap:10px;font-size:12px;color:var(--muted);margin:10px 0 4px}
-.preset {min-width:72px}
-.row {display:flex;gap:10px;align-items:center}
-.row>* {min-width:0}
-.field-grid {display:grid;grid-template-columns:1fr 1fr;gap:13px}
-.field-grid .full {grid-column:1/-1}
-.check {display:flex;align-items:center;gap:9px;font-size:13px;color:var(--text);margin:15px 0 0}
-.check input {accent-color:var(--cyan)}
+.drop:hover,.drop.drag { border-color:var(--cyan); background:#102025; }
+.drop strong { display:block; font-size:14px; }
+.drop input { width:100%; max-width:260px; margin-top:12px; font-size:12px; }
+.wave-wrap { margin-top:16px; background:#090b11; border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+#wave { display:block; width:100%; height:130px; touch-action:pan-y; cursor:crosshair; }
+.times { display:flex; justify-content:space-between; gap:10px; font-size:12px; color:var(--muted); margin:10px 0 4px; }
+.preset { min-width:72px; }
+.row { display:flex; gap:10px; align-items:center; }
+.row>* { min-width:0; }
+.field-grid { display:grid; grid-template-columns:1fr 1fr; gap:13px; }
+.field-grid .full { grid-column:1/-1; }
+.check { display:flex; align-items:center; gap:9px; font-size:13px; color:var(--text); margin:15px 0 0; }
+.check input { accent-color:var(--cyan); }
 #preview {
-  width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;
-  display:block;background:#07080e;border-radius:12px;border:1px solid var(--line);
+  width:100%; height:auto; aspect-ratio:auto;
+  object-fit:contain; display:block; background:#07080e;
+  border-radius:12px; border:1px solid var(--line);
 }
-.transport {display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.transport button {flex:1}
-.status {font-size:12px;color:var(--cyan);min-height:22px;margin-top:12px;overflow-wrap:anywhere}
-.meter {height:3px;background:#292d3b;border-radius:9px;overflow:hidden;margin-top:6px}
-#progress {height:100%;width:0;background:var(--cyan);transition:width .15s}
-.help {font-size:11px;line-height:1.6;color:var(--muted);margin:12px 0 0}
-footer {padding-top:22px;color:var(--muted);font-size:11px;text-align:center}
+.transport { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+.transport button { flex:1; }
+.status { font-size:12px; color:var(--cyan); min-height:22px; margin-top:12px; overflow-wrap:anywhere; }
+.meter { height:3px; background:#292d3b; border-radius:9px; overflow:hidden; margin-top:6px; }
+#progress { height:100%; width:0; background:var(--cyan); transition:width .15s; }
+.help { font-size:11px; line-height:1.6; color:var(--muted); margin:12px 0 0; }
+footer { padding-top:22px; color:var(--muted); font-size:11px; text-align:center; }
 @media(max-width:760px) {
- .layout {grid-template-columns:1fr}
- .app {padding:18px 13px 32px}
- .card {padding:15px}
- .topbar {align-items:flex-start}
- .hero h2 {letter-spacing:-1px}
+  .layout { grid-template-columns:1fr; }
+  .app { padding:18px 13px 32px; }
+  .card { padding:15px; }
+  .topbar { align-items:flex-start; }
+  .hero h2 { letter-spacing:-1px; }
 }
 @media(max-width:420px) {
- .field-grid {grid-template-columns:1fr}
- .field-grid .full {grid-column:auto}
- .top-actions button {padding:8px}
+  .field-grid { grid-template-columns:1fr; }
+  .field-grid .full { grid-column:auto; }
+  .top-actions button { padding:8px; }
 }
 </style>
 </head>
@@ -142,7 +143,7 @@ footer {padding-top:22px;color:var(--muted);font-size:11px;text-align:center}
 <div class="stack">
 <section class="card">
   <div class="card-head">
-    <h3>01 / Source & selection</h3>
+    <h3>01 / Source &amp; selection</h3>
     <span class="pill" id="fileBadge">No audio loaded</span>
   </div>
   <label class="drop" id="drop" for="file">
@@ -212,264 +213,649 @@ footer {padding-top:22px;color:var(--muted);font-size:11px;text-align:center}
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.min.js"></script>
+
 <script>
 (() => {
 'use strict';
-const $ = id => document.getElementById(id);
-const wave=$('wave'), wctx=wave.getContext('2d');
-const preview=$('preview'), pctx=preview.getContext('2d');
-const status=$('status'), progress=$('progress');
-let audioCtx=null, audioBuffer=null, source=null, gain=null, analyser=null;
-let clipLength=29, start=0, playing=false, recording=false, raf=0, playAt=0;
-let recorder=null, stream=null, chunks=[], fileBase='clip', loadToken=0;
-let installPrompt=null, particles=Array.from({length:120},()=>({
- x:Math.random()*1280,y:Math.random()*720,z:Math.random()*900+100,h:Math.random()*100+170
-}));
-const say=s=>status.textContent=s;
-const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
-const fmt=s=>{s=Math.max(0,s||0);return `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;};
-const actual=()=>audioBuffer?Math.min(clipLength,audioBuffer.duration):clipLength;
-const maxStart=()=>audioBuffer?Math.max(0,audioBuffer.duration-clipLength):0;
 
-async function getContext(){
- if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();
- if(audioCtx.state==='suspended')await audioCtx.resume();
-}
-function selectionUI(){
- if(!audioBuffer)return;
- start=clamp(Number(start)||0,0,maxStart());
- $('start').max=String(maxStart());$('start').value=String(start);
- $('selection').textContent=`Start ${fmt(start)} · End ${fmt(start+actual())} · ${actual().toFixed(1)}s`;
- $('total').textContent=`Duration ${fmt(audioBuffer.duration)}`;
- $('startLabel').textContent=`Start: ${fmt(start)}`;
- drawWave();
-}
-function drawWave(playhead=null){
- const w=wave.width,h=wave.height;
- wctx.clearRect(0,0,w,h);wctx.fillStyle='#090b12';wctx.fillRect(0,0,w,h);
- if(!audioBuffer){wctx.fillStyle='#777f93';wctx.font='16px system-ui';wctx.textAlign='center';wctx.fillText('Your waveform will appear here',w/2,h/2);return;}
- const data=audioBuffer.getChannelData(0),step=Math.max(1,Math.floor(data.length/w));
- wctx.fillStyle='#657287';
- for(let x=0;x<w;x++){
-  let lo=1,hi=-1;
-  for(let j=x*step;j<Math.min(data.length,(x+1)*step);j++){lo=Math.min(lo,data[j]);hi=Math.max(hi,data[j]);}
-  wctx.fillRect(x,(1+lo)*h/2,1,Math.max(1,(hi-lo)*h/2));
- }
- const sx=start/audioBuffer.duration*w,sw=actual()/audioBuffer.duration*w;
- wctx.fillStyle='rgba(101,244,237,.20)';wctx.fillRect(sx,0,sw,h);
- wctx.strokeStyle='#65f4ed';wctx.lineWidth=2;wctx.strokeRect(sx,1,sw,h-2);
- if(playhead!==null){wctx.fillStyle='#ff6b9c';wctx.fillRect(clamp(playhead/audioBuffer.duration*w,0,w-2),0,2,h);}
-}
-async function loadFile(file){
- if(!file||recording)return;
- stop();
- const token=++loadToken;audioBuffer=null;
- $('play').disabled=true;$('export').disabled=true;
- $('fileBadge').textContent=file.name;say('Decoding audio…');progress.style.width='0%';
- fileBase=file.name.replace(/\.[^.]+$/,'').replace(/[^\w -]/g,'').trim()||'clip';
- try{
-  await getContext();const b=await file.arrayBuffer();const decoded=await audioCtx.decodeAudioData(b);
-  if(token!==loadToken)return;
-  audioBuffer=decoded;start=0;if(!$('title').value)$('title').value=fileBase;
-  selectionUI();drawIdle();$('play').disabled=false;$('export').disabled=false;
-  say('Ready to preview or export.');
- }catch(e){if(token!==loadToken)return;audioBuffer=null;drawWave();say('Could not decode this file. Try WAV or MP3 in a supported browser.');}
-}
-$('file').addEventListener('change',e=>loadFile(e.target.files[0]));
-$('drop').addEventListener('dragover',e=>{e.preventDefault();$('drop').classList.add('drag');});
-$('drop').addEventListener('dragleave',()=>$('drop').classList.remove('drag'));
-$('drop').addEventListener('drop',e=>{e.preventDefault();$('drop').classList.remove('drag');if(e.dataTransfer.files[0])loadFile(e.dataTransfer.files[0]);});
-document.querySelectorAll('.preset').forEach(b=>b.addEventListener('click',()=>{
- if(recording)return;clipLength=Number(b.dataset.sec);
- document.querySelectorAll('.preset').forEach(x=>x.classList.toggle('selected',x===b));
- selectionUI();
+const $ = id => document.getElementById(id);
+const wave = $('wave'), wctx = wave.getContext('2d');
+const preview = $('preview'), pctx = preview.getContext('2d');
+const status = $('status'), progress = $('progress');
+
+let audioCtx = null, audioBuffer = null, source = null;
+let gain = null, analyser = null;
+let clipLength = 29, start = 0, playing = false, recording = false;
+let raf = 0, playAt = 0, recorder = null, stream = null;
+let chunks = [], fileBase = 'clip', loadToken = 0;
+let installPrompt = null, lastURL = null, recordingFailed = false;
+
+let particles = Array.from({length:120}, () => ({
+  x:Math.random()*1280, y:Math.random()*720,
+  z:Math.random()*900+100, h:Math.random()*100+170
 }));
-$('start').addEventListener('input',()=>{start=Number($('start').value);selectionUI();});
-function pickWave(e){
- if(!audioBuffer||recording)return;
- const r=wave.getBoundingClientRect();
- start=clamp((e.clientX-r.left)/r.width*audioBuffer.duration-actual()/2,0,maxStart());
- selectionUI();
+
+const say = s => status.textContent = s;
+const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
+const fmt = s => {
+  s = Math.max(0,s||0);
+  return `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+};
+const actual = () => audioBuffer ? Math.min(clipLength,audioBuffer.duration) : clipLength;
+const maxStart = () => audioBuffer ? Math.max(0,audioBuffer.duration-actual()) : 0;
+
+async function getContext() {
+  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContextClass) throw Error('Web Audio is not supported in this browser.');
+  if (!audioCtx) audioCtx = new AudioContextClass();
+  if (audioCtx.state === 'suspended') await audioCtx.resume();
+}
+
+function selectionUI() {
+  if (!audioBuffer) return;
+  start = clamp(Number(start)||0,0,maxStart());
+  $('start').max = String(maxStart());
+  $('start').value = String(start);
+  $('selection').textContent = `Start ${fmt(start)} · End ${fmt(start+actual())} · ${actual().toFixed(1)}s`;
+  $('total').textContent = `Duration ${fmt(audioBuffer.duration)}`;
+  $('startLabel').textContent = `Start: ${fmt(start)}`;
+  drawWave();
+}
+
+function drawWave(playhead = null) {
+  const w = wave.width, h = wave.height;
+  wctx.clearRect(0,0,w,h);
+  wctx.fillStyle = '#090b12';
+  wctx.fillRect(0,0,w,h);
+
+  if (!audioBuffer) {
+    wctx.fillStyle = '#777f93';
+    wctx.font = '16px system-ui';
+    wctx.textAlign = 'center';
+    wctx.fillText('Your waveform will appear here',w/2,h/2);
+    return;
+  }
+
+  const data = audioBuffer.getChannelData(0);
+  wctx.fillStyle = '#657287';
+
+  for (let x=0; x<w; x++) {
+    const from = Math.floor(x*data.length/w);
+    const to = Math.max(from+1,Math.floor((x+1)*data.length/w));
+    let lo = 1, hi = -1;
+    for (let j=from; j<Math.min(data.length,to); j++) {
+      lo = Math.min(lo,data[j]);
+      hi = Math.max(hi,data[j]);
+    }
+    if (lo > hi) lo = hi = 0;
+    wctx.fillRect(x,(1+lo)*h/2,1,Math.max(1,(hi-lo)*h/2));
+  }
+
+  const sx = start/audioBuffer.duration*w;
+  const sw = actual()/audioBuffer.duration*w;
+  wctx.fillStyle = 'rgba(101,244,237,.20)';
+  wctx.fillRect(sx,0,sw,h);
+  wctx.strokeStyle = '#65f4ed';
+  wctx.lineWidth = 2;
+  wctx.strokeRect(sx,1,sw,h-2);
+
+  if (playhead !== null) {
+    wctx.fillStyle = '#ff6b9c';
+    wctx.fillRect(clamp(playhead/audioBuffer.duration*w,0,w-2),0,2,h);
+  }
+}
+
+async function loadFile(file) {
+  if (!file || recording) return;
+
+  stop();
+  const token = ++loadToken;
+  audioBuffer = null;
+  $('play').disabled = true;
+  $('export').disabled = true;
+  $('fileBadge').textContent = file.name;
+  say('Decoding audio…');
+  progress.style.width = '0%';
+  fileBase = file.name.replace(/\.[^.]+$/,'').replace(/[^\w -]/g,'').trim() || 'clip';
+
+  try {
+    await getContext();
+    const bytes = await file.arrayBuffer();
+    const decoded = await audioCtx.decodeAudioData(bytes);
+    if (token !== loadToken) return;
+
+    audioBuffer = decoded;
+    start = 0;
+    if (!$('title').value) $('title').value = fileBase;
+    selectionUI();
+    drawIdle();
+    $('play').disabled = false;
+    $('export').disabled = false;
+    say('Ready to preview or export.');
+  } catch (e) {
+    if (token !== loadToken) return;
+    audioBuffer = null;
+    $('fileBadge').textContent = 'Could not load audio';
+    drawWave();
+    say('Could not decode this file. Try WAV or MP3 in a supported browser.');
+  }
+}
+
+$('file').addEventListener('change',e => loadFile(e.target.files[0]));
+$('drop').addEventListener('dragover',e => {
+  e.preventDefault();
+  $('drop').classList.add('drag');
+});
+$('drop').addEventListener('dragleave',() => $('drop').classList.remove('drag'));
+$('drop').addEventListener('drop',e => {
+  e.preventDefault();
+  $('drop').classList.remove('drag');
+  if (e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+});
+
+document.querySelectorAll('.preset').forEach(b => b.addEventListener('click',() => {
+  if (recording) return;
+  clipLength = Number(b.dataset.sec);
+  document.querySelectorAll('.preset').forEach(x => x.classList.toggle('selected',x===b));
+  selectionUI();
+}));
+
+$('start').addEventListener('input',() => {
+  start = Number($('start').value);
+  selectionUI();
+});
+
+function pickWave(e) {
+  if (!audioBuffer || recording) return;
+  const r = wave.getBoundingClientRect();
+  start = clamp((e.clientX-r.left)/r.width*audioBuffer.duration-actual()/2,0,maxStart());
+  selectionUI();
 }
 wave.addEventListener('pointerdown',pickWave);
 
-function resizeCanvas(){
- if($('ratio').value==='tall'){preview.width=720;preview.height=1280;}
- else{preview.width=1280;preview.height=720;}
- drawIdle();
-}
-$('ratio').addEventListener('change',resizeCanvas);
-['style','title','artist'].forEach(id=>$(id).addEventListener('input',()=>{if(!playing)drawIdle();}));
-
-function drawViz(freq,elapsed=0){
- const w=preview.width,h=preview.height,style=$('style').value;
- pctx.fillStyle=style==='synthwave'?'#11081e':'#070910';pctx.fillRect(0,0,w,h);
- let bass=0;if(freq)for(let i=0;i<Math.min(16,freq.length);i++)bass+=freq[i]/255;
- bass/=16;
- if(style==='radial'){
-  const cx=w/2,cy=h*.46,r=Math.min(w,h)*.19+bass*24;
-  pctx.beginPath();pctx.arc(cx,cy,r,0,Math.PI*2);pctx.strokeStyle='#65f4ed';pctx.lineWidth=4;pctx.stroke();
-  for(let i=0;i<100;i++){
-   const v=freq?freq[i%freq.length]/255:0,a=i/100*Math.PI*2-elapsed*.08,len=8+v*Math.min(w,h)*.24;
-   pctx.beginPath();pctx.moveTo(cx+Math.cos(a)*r,cy+Math.sin(a)*r);pctx.lineTo(cx+Math.cos(a)*(r+len),cy+Math.sin(a)*(r+len));
-   pctx.strokeStyle=`hsl(${175+i*1.5},95%,65%)`;pctx.lineWidth=Math.max(2,w/250);pctx.stroke();
+function resizeCanvas() {
+  if ($('ratio').value === 'tall') {
+    preview.width = 720;
+    preview.height = 1280;
+  } else {
+    preview.width = 1280;
+    preview.height = 720;
   }
- }else if(style==='synthwave'){
-  const hz=h*.57,g=pctx.createLinearGradient(0,hz-200,0,hz);
-  g.addColorStop(0,'#ff397d');g.addColorStop(1,'#ffcf70');pctx.fillStyle=g;
-  pctx.beginPath();pctx.arc(w/2,hz-45,Math.min(w,h)*.19+bass*20,0,Math.PI*2);pctx.fill();
-  pctx.strokeStyle='#ff5bc8';pctx.lineWidth=2;
-  for(let i=-12;i<=12;i++){pctx.beginPath();pctx.moveTo(w/2+i*30,hz);pctx.lineTo(w/2+i*w*.13,h);pctx.stroke();}
-  for(let j=0;j<12;j++){const q=((j/12+elapsed*.25)%1),y=hz+q*q*(h-hz);pctx.beginPath();pctx.moveTo(0,y);pctx.lineTo(w,y);pctx.stroke();}
-  if(freq)for(let i=0;i<48;i++){const v=freq[i*2%freq.length]/255,bw=w/48;pctx.fillStyle=`hsl(${270+i*1.2},90%,${25+v*30}%)`;pctx.fillRect(i*bw,hz-v*h*.2,bw-2,10+v*h*.2);}
- }else{
-  const cx=w/2,cy=h/2;
-  particles.forEach((p,i)=>{
-   p.z-=1.8+bass*14;if(p.z<12){p.z=1000;p.x=Math.random()*w;p.y=Math.random()*h;}
-   const x=cx+(p.x-cx)*500/p.z,y=cy+(p.y-cy)*500/p.z;if(x<0||x>w||y<0||y>h)return;
-   pctx.fillStyle=`hsla(${p.h+bass*60},100%,70%,${1-p.z/1100})`;
-   pctx.beginPath();pctx.arc(x,y,Math.max(1,(1-p.z/1000)*7+(freq?freq[i%freq.length]/255*4:0)),0,Math.PI*2);pctx.fill();
+  particles.forEach(p => {
+    p.x = Math.random()*preview.width;
+    p.y = Math.random()*preview.height;
   });
- }
- const title=$('title').value.trim(),artist=$('artist').value.trim(),pad=w*.055;
- pctx.save();pctx.textAlign='left';pctx.shadowColor='#000';pctx.shadowBlur=12;
- const drawText=(s,y,size,color)=>{
-  if(!s)return;pctx.font=`700 ${size}px system-ui`;
-  while(pctx.measureText(s).width>w-pad*2&&size>15){size-=2;pctx.font=`700 ${size}px system-ui`;}
-  pctx.fillStyle='#000';pctx.fillText(s,pad+2,y+2,w-pad*2);pctx.fillStyle=color;pctx.fillText(s,pad,y,w-pad*2);
- };
- drawText(title,h-pad-30,Math.round(w*.037),'#fff');drawText(artist,h-pad,Math.round(w*.023),'#65f4ed');pctx.restore();
+  drawIdle();
 }
-function drawIdle(){drawViz(null,0);}
-function fadeAt(t,d){
- if(!$('fade').checked)return 1;
- const f=Math.min(1.5,d/4);
- if(t<f)return t/f;
- if(t>d-f)return Math.max(0,(d-t)/f);
- return 1;
-}
-async function play(video=false){
- if(!audioBuffer||recording)return;
- stop();
- try{
-  await getContext();
-  const d=Math.min(actual(),audioBuffer.duration-start);if(d<=0)throw Error('The selection is empty.');
-  source=audioCtx.createBufferSource();source.buffer=audioBuffer;
-  gain=audioCtx.createGain();analyser=audioCtx.createAnalyser();analyser.fftSize=512;
-  const now=audioCtx.currentTime,f=Math.min(1.5,d/4);
-  if($('fade').checked){
-   gain.gain.setValueAtTime(.00001,now);gain.gain.linearRampToValueAtTime(1,now+f);
-   gain.gain.setValueAtTime(1,now+Math.max(f,d-f));gain.gain.linearRampToValueAtTime(.00001,now+d);
-  }else gain.gain.setValueAtTime(1,now);
-  source.connect(gain);gain.connect(analyser);analyser.connect(audioCtx.destination);
-  if(video){
-   if(!window.MediaRecorder||!preview.captureStream)throw Error('Video recording is unsupported in this browser.');
-   const dest=audioCtx.createMediaStreamDestination();gain.connect(dest);
-   stream=preview.captureStream(30);dest.stream.getAudioTracks().forEach(t=>stream.addTrack(t));
-   const types=['video/mp4;codecs=avc1.42E01E,mp4a.40.2','video/mp4','video/webm;codecs=vp9,opus','video/webm'];
-   const mime=types.find(t=>MediaRecorder.isTypeSupported(t));
-   recorder=mime?new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:5000000}):new MediaRecorder(stream);
-   chunks=[];recording=true;
-   recorder.ondataavailable=e=>{if(e.data?.size)chunks.push(e.data);};
-   recorder.onerror=()=>say('Video recording failed in this browser.');
-   recorder.onstop=()=>{
-    const type=recorder.mimeType||'video/webm',ext=type.includes('mp4')?'mp4':'webm';
-    download(new Blob(chunks,{type}),`${fileBase}_${Math.round(d)}s.${ext}`);
-    stream?.getTracks().forEach(t=>t.stop());stream=null;recorder=null;recording=false;
-    $('export').disabled=!audioBuffer;$('play').disabled=!audioBuffer;
-    progress.style.width='100%';say(`Video saved as ${ext.toUpperCase()}.`);
-   };
-   recorder.start(250);$('export').disabled=true;$('play').disabled=true;
+
+$('ratio').addEventListener('change',resizeCanvas);
+['style','title','artist'].forEach(id => $(id).addEventListener('input',() => {
+  if (!playing) drawIdle();
+}));
+
+function drawViz(freq,elapsed=0) {
+  const w = preview.width, h = preview.height, style = $('style').value;
+  pctx.fillStyle = style === 'synthwave' ? '#11081e' : '#070910';
+  pctx.fillRect(0,0,w,h);
+
+  let bass = 0;
+  if (freq) for (let i=0; i<Math.min(16,freq.length); i++) bass += freq[i]/255;
+  bass /= 16;
+
+  if (style === 'radial') {
+    const cx=w/2, cy=h*.46, r=Math.min(w,h)*.19+bass*24;
+    pctx.beginPath();
+    pctx.arc(cx,cy,r,0,Math.PI*2);
+    pctx.strokeStyle='#65f4ed';
+    pctx.lineWidth=4;
+    pctx.stroke();
+
+    for (let i=0; i<100; i++) {
+      const v=freq ? freq[i%freq.length]/255 : 0;
+      const a=i/100*Math.PI*2-elapsed*.08;
+      const len=8+v*Math.min(w,h)*.24;
+      pctx.beginPath();
+      pctx.moveTo(cx+Math.cos(a)*r,cy+Math.sin(a)*r);
+      pctx.lineTo(cx+Math.cos(a)*(r+len),cy+Math.sin(a)*(r+len));
+      pctx.strokeStyle=`hsl(${175+i*1.5},95%,65%)`;
+      pctx.lineWidth=Math.max(2,w/250);
+      pctx.stroke();
+    }
+  } else if (style === 'synthwave') {
+    const hz=h*.57;
+    const g=pctx.createLinearGradient(0,hz-200,0,hz);
+    g.addColorStop(0,'#ff397d');
+    g.addColorStop(1,'#ffcf70');
+    pctx.fillStyle=g;
+    pctx.beginPath();
+    pctx.arc(w/2,hz-45,Math.min(w,h)*.19+bass*20,0,Math.PI*2);
+    pctx.fill();
+
+    pctx.strokeStyle='#ff5bc8';
+    pctx.lineWidth=2;
+    for (let i=-12; i<=12; i++) {
+      pctx.beginPath();
+      pctx.moveTo(w/2+i*30,hz);
+      pctx.lineTo(w/2+i*w*.13,h);
+      pctx.stroke();
+    }
+    for (let j=0; j<12; j++) {
+      const q=((j/12+elapsed*.25)%1), y=hz+q*q*(h-hz);
+      pctx.beginPath();
+      pctx.moveTo(0,y);
+      pctx.lineTo(w,y);
+      pctx.stroke();
+    }
+    if (freq) for (let i=0; i<48; i++) {
+      const v=freq[i*2%freq.length]/255, bw=w/48;
+      pctx.fillStyle=`hsl(${270+i*1.2},90%,${25+v*30}%)`;
+      pctx.fillRect(i*bw,hz-v*h*.2,bw-2,10+v*h*.2);
+    }
+  } else {
+    const cx=w/2, cy=h/2;
+    particles.forEach((p,i) => {
+      p.z -= 1.8+bass*14;
+      if (p.z<12) {
+        p.z=1000;
+        p.x=Math.random()*w;
+        p.y=Math.random()*h;
+      }
+      const x=cx+(p.x-cx)*500/p.z;
+      const y=cy+(p.y-cy)*500/p.z;
+      if (x<0 || x>w || y<0 || y>h) return;
+      pctx.fillStyle=`hsla(${p.h+bass*60},100%,70%,${1-p.z/1100})`;
+      pctx.beginPath();
+      pctx.arc(x,y,Math.max(1,(1-p.z/1000)*7+(freq?freq[i%freq.length]/255*4:0)),0,Math.PI*2);
+      pctx.fill();
+    });
   }
-  playing=true;playAt=audioCtx.currentTime;$('stop').disabled=false;
-  source.onended=()=>{if(playing)stop();};
-  source.start(0,start,d);render(d);
-  if(video)say('Recording video in real time… keep this tab open.');
- }catch(e){say(e.message||'Could not start playback.');if(recording&&recorder?.state!=='inactive')recorder.stop();recording=false;}
-}
-function render(d){
- if(!playing)return;
- const elapsed=Math.min(d,audioCtx.currentTime-playAt),freq=new Uint8Array(analyser.frequencyBinCount);
- analyser.getByteFrequencyData(freq);drawViz(freq,elapsed);drawWave(start+elapsed);
- if(recording){progress.style.width=`${Math.min(100,elapsed/d*100)}%`;say(`Recording visualizer… ${Math.round(elapsed/d*100)}%`);}
- if(elapsed<d)raf=requestAnimationFrame(()=>render(d));
-}
-function stop(){
- playing=false;if(raf)cancelAnimationFrame(raf);raf=0;
- if(source){source.onended=null;try{source.stop();source.disconnect();}catch(e){}source=null;}
- if(recording&&recorder&&recorder.state!=='inactive'){try{recorder.stop();}catch(e){}}
- $('stop').disabled=true;if(audioBuffer)drawWave();
-}
-$('play').addEventListener('click',()=>play(false));
-$('stop').addEventListener('click',()=>{stop();if(!recording)say('Playback stopped.');});
 
-function samples(){
- const sr=audioBuffer.sampleRate,d=Math.min(actual(),audioBuffer.duration-start),n=Math.floor(d*sr),off=Math.floor(start*sr);
- const channels=[];
- for(let c=0;c<Math.min(2,audioBuffer.numberOfChannels);c++){
-  const src=audioBuffer.getChannelData(c),out=new Float32Array(n);
-  for(let i=0;i<n;i++)out[i]=clamp(src[off+i]*fadeAt(i/sr,d),-1,1);
-  channels.push(out);
- }
- return {sr,d,channels};
+  const title=$('title').value.trim(), artist=$('artist').value.trim(), pad=w*.055;
+  pctx.save();
+  pctx.textAlign='left';
+  pctx.shadowColor='#000';
+  pctx.shadowBlur=12;
+
+  const drawText=(s,y,size,color) => {
+    if (!s) return;
+    pctx.font=`700 ${size}px system-ui`;
+    while (pctx.measureText(s).width>w-pad*2 && size>15) {
+      size-=2;
+      pctx.font=`700 ${size}px system-ui`;
+    }
+    pctx.fillStyle='#000';
+    pctx.fillText(s,pad+2,y+2,w-pad*2);
+    pctx.fillStyle=color;
+    pctx.fillText(s,pad,y,w-pad*2);
+  };
+
+  drawText(title,h-pad-30,Math.round(w*.037),'#fff');
+  drawText(artist,h-pad,Math.round(w*.023),'#65f4ed');
+  pctx.restore();
 }
-function wav(channels,sr){
- const nc=channels.length,n=channels[0].length,bytes=n*nc*2,ab=new ArrayBuffer(44+bytes),v=new DataView(ab);
- const str=(o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i));};
- str(0,'RIFF');v.setUint32(4,36+bytes,true);str(8,'WAVE');str(12,'fmt ');v.setUint32(16,16,true);
- v.setUint16(20,1,true);v.setUint16(22,nc,true);v.setUint32(24,sr,true);v.setUint32(28,sr*nc*2,true);
- v.setUint16(32,nc*2,true);v.setUint16(34,16,true);str(36,'data');v.setUint32(40,bytes,true);
- let o=44;for(let i=0;i<n;i++)for(let c=0;c<nc;c++){const s=channels[c][i];v.setInt16(o,s<0?s*32768:s*32767,true);o+=2;}
- return new Blob([ab],{type:'audio/wav'});
+
+function drawIdle() { drawViz(null,0); }
+
+function fadeAt(t,d) {
+  if (!$('fade').checked) return 1;
+  const f=Math.min(1.5,d/4);
+  if (t<f) return t/f;
+  if (t>d-f) return Math.max(0,(d-t)/f);
+  return 1;
 }
-function mp3(channels,sr){
- if(!window.lamejs)throw Error('MP3 encoder unavailable. Check your connection and reload the page.');
- const supported=[44100,48000,32000,24000,22050,16000,12000,11025,8000];
- if(!supported.includes(sr))throw Error('Unsupported sample rate for MP3. Choose WAV instead.');
- const enc=new lamejs.Mp3Encoder(channels.length,sr,192);
- const cv=a=>{const b=new Int16Array(a.length);for(let i=0;i<a.length;i++)b[i]=a[i]<0?a[i]*32768:a[i]*32767;return b;};
- const left=cv(channels[0]),right=channels.length>1?cv(channels[1]):null,out=[];
- for(let i=0;i<left.length;i+=1152){const b=channels.length>1?enc.encodeBuffer(left.subarray(i,i+1152),right.subarray(i,i+1152)):enc.encodeBuffer(left.subarray(i,i+1152));if(b.length)out.push(b);}
- const tail=enc.flush();if(tail.length)out.push(tail);
- return new Blob(out,{type:'audio/mpeg'});
+
+function cleanupRecording() {
+  if (raf) cancelAnimationFrame(raf);
+  raf = 0;
+  playing = false;
+
+  if (source) {
+    source.onended = null;
+    try { source.stop(); } catch (e) {}
+    try { source.disconnect(); } catch (e) {}
+    source = null;
+  }
+
+  if (stream) {
+    stream.getTracks().forEach(track => track.stop());
+    stream = null;
+  }
+
+  recorder = null;
+  recording = false;
+  $('export').disabled = !audioBuffer;
+  $('play').disabled = !audioBuffer;
+  $('stop').disabled = true;
+  if (audioBuffer) drawWave();
 }
-let lastURL=null;
-function download(blob,name){
- if(lastURL)URL.revokeObjectURL(lastURL);
- lastURL=URL.createObjectURL(blob);const a=document.createElement('a');a.href=lastURL;a.download=name;
- document.body.appendChild(a);a.click();a.remove();
- setTimeout(()=>{if(lastURL){URL.revokeObjectURL(lastURL);lastURL=null;}},60000);
+
+async function play(video=false) {
+  if (!audioBuffer || recording) return;
+  stop();
+
+  try {
+    await getContext();
+    const d=Math.min(actual(),audioBuffer.duration-start);
+    if (d<=0) throw Error('The selection is empty.');
+
+    source=audioCtx.createBufferSource();
+    source.buffer=audioBuffer;
+    gain=audioCtx.createGain();
+    analyser=audioCtx.createAnalyser();
+    analyser.fftSize=512;
+
+    const now=audioCtx.currentTime, f=Math.min(1.5,d/4);
+    if ($('fade').checked) {
+      gain.gain.setValueAtTime(.00001,now);
+      gain.gain.linearRampToValueAtTime(1,now+f);
+      gain.gain.setValueAtTime(1,now+Math.max(f,d-f));
+      gain.gain.linearRampToValueAtTime(.00001,now+d);
+    } else {
+      gain.gain.setValueAtTime(1,now);
+    }
+
+    source.connect(gain);
+    gain.connect(analyser);
+    analyser.connect(audioCtx.destination);
+
+    if (video) {
+      if (!window.MediaRecorder || !preview.captureStream || !audioCtx.createMediaStreamDestination) {
+        throw Error('Video recording is unsupported in this browser.');
+      }
+
+      const dest=audioCtx.createMediaStreamDestination();
+      gain.connect(dest);
+      stream=preview.captureStream(30);
+      dest.stream.getAudioTracks().forEach(t => stream.addTrack(t));
+
+      const types=[
+        'video/mp4;codecs=avc1.42E01E,mp4a.40.2',
+        'video/mp4',
+        'video/webm;codecs=vp9,opus',
+        'video/webm'
+      ];
+      const mime=types.find(t => MediaRecorder.isTypeSupported(t));
+      recorder=mime
+        ? new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:5000000})
+        : new MediaRecorder(stream);
+
+      chunks=[];
+      recordingFailed=false;
+      recording=true;
+
+      recorder.ondataavailable=e => {
+        if (e.data && e.data.size) chunks.push(e.data);
+      };
+
+      recorder.onerror=() => {
+        recordingFailed=true;
+        say('Video recording failed. Please try again.');
+        try {
+          if (recorder && recorder.state!=='inactive') recorder.stop();
+          else cleanupRecording();
+        } catch (e) {
+          cleanupRecording();
+        }
+      };
+
+      recorder.onstop=() => {
+        const failed=recordingFailed;
+        const type=recorder?.mimeType || 'video/webm';
+        const ext=type.includes('mp4') ? 'mp4' : 'webm';
+
+        if (!failed && chunks.length) {
+          download(new Blob(chunks,{type}),`${fileBase}_${Math.round(d)}s.${ext}`);
+        }
+
+        cleanupRecording();
+        chunks=[];
+
+        if (!failed) {
+          if (chunks.length===0 && !lastURL) {
+            say('Recording stopped, but no video data was produced.');
+          } else {
+            progress.style.width='100%';
+            say(`Video saved as ${ext.toUpperCase()}.`);
+          }
+        }
+      };
+
+      recorder.start(250);
+      $('export').disabled=true;
+      $('play').disabled=true;
+      progress.style.width='0%';
+    }
+
+    playing=true;
+    playAt=audioCtx.currentTime;
+    $('stop').disabled=false;
+    source.onended=() => {
+      if (video && recording && recorder && recorder.state!=='inactive') {
+        try { recorder.stop(); } catch (e) { cleanupRecording(); }
+      }
+      if (playing) {
+        playing=false;
+        if (raf) cancelAnimationFrame(raf);
+        raf=0;
+        if (!recording) {
+          $('stop').disabled=true;
+          drawIdle();
+          drawWave();
+        }
+      }
+    };
+
+    source.start(0,start,d);
+    render(d);
+    if (video) say('Recording video in real time… keep this tab open.');
+  } catch (e) {
+    say(e.message || 'Could not start playback.');
+    if (recording && recorder && recorder.state!=='inactive') {
+      try { recorder.stop(); } catch (err) { cleanupRecording(); }
+    } else {
+      cleanupRecording();
+    }
+  }
 }
-$('export').addEventListener('click',async()=>{
- if(!audioBuffer||recording)return;
- if($('format').value==='video'){await play(true);return;}
- $('export').disabled=true;progress.style.width='15%';say('Preparing audio export…');
- await new Promise(r=>setTimeout(r,25));
- try{
-  const x=samples();progress.style.width='65%';
-  const blob=$('format').value==='wav'?wav(x.channels,x.sr):mp3(x.channels,x.sr);
-  const ext=$('format').value;download(blob,`${fileBase}_${Math.round(x.d)}s.${ext}`);
-  progress.style.width='100%';say('Export complete. Check your Downloads folder.');
- }catch(e){say(e.message||'Export failed.');progress.style.width='0%';}
- finally{$('export').disabled=!audioBuffer;}
+
+function render(d) {
+  if (!playing) return;
+  const elapsed=Math.min(d,audioCtx.currentTime-playAt);
+  const freq=new Uint8Array(analyser.frequencyBinCount);
+  analyser.getByteFrequencyData(freq);
+  drawViz(freq,elapsed);
+  drawWave(start+elapsed);
+
+  if (recording) {
+    progress.style.width=`${Math.min(100,elapsed/d*100)}%`;
+    say(`Recording visualizer… ${Math.round(elapsed/d*100)}%`);
+  }
+
+  if (elapsed<d) raf=requestAnimationFrame(() => render(d));
+}
+
+function stop() {
+  playing=false;
+  if (raf) cancelAnimationFrame(raf);
+  raf=0;
+
+  if (source) {
+    source.onended=null;
+    try { source.stop(); } catch (e) {}
+    try { source.disconnect(); } catch (e) {}
+    source=null;
+  }
+
+  if (recording && recorder && recorder.state!=='inactive') {
+    try { recorder.stop(); } catch (e) { cleanupRecording(); }
+  }
+
+  $('stop').disabled=true;
+  if (audioBuffer) drawWave();
+}
+
+$('play').addEventListener('click',() => play(false));
+$('stop').addEventListener('click',() => {
+  stop();
+  if (!recording) say('Playback stopped.');
 });
 
-window.addEventListener('beforeinstallprompt',e=>{
- e.preventDefault();installPrompt=e;$('install').hidden=false;
-});
-$('install').addEventListener('click',async()=>{
- if(!installPrompt)return;
- installPrompt.prompt();await installPrompt.userChoice;
- installPrompt=null;$('install').hidden=true;
-});
-if('serviceWorker' in navigator && location.protocol!=='file:'){
- window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+function samples() {
+  const sr=audioBuffer.sampleRate;
+  const d=Math.min(actual(),audioBuffer.duration-start);
+  const n=Math.floor(d*sr), off=Math.floor(start*sr);
+  const channels=[];
+
+  for (let c=0; c<Math.min(2,audioBuffer.numberOfChannels); c++) {
+    const src=audioBuffer.getChannelData(c), out=new Float32Array(n);
+    for (let i=0; i<n; i++) out[i]=clamp(src[off+i]*fadeAt(i/sr,d),-1,1);
+    channels.push(out);
+  }
+
+  if (!channels.length) throw Error('No audio channels available for export.');
+  return {sr,d,channels};
 }
-window.addEventListener('beforeunload',()=>{
- stop();stream?.getTracks().forEach(t=>t.stop());if(lastURL)URL.revokeObjectURL(lastURL);
+
+function wav(channels,sr) {
+  const nc=channels.length, n=channels[0].length, bytes=n*nc*2;
+  const ab=new ArrayBuffer(44+bytes), v=new DataView(ab);
+  const str=(o,s) => {
+    for (let i=0; i<s.length; i++) v.setUint8(o+i,s.charCodeAt(i));
+  };
+
+  str(0,'RIFF');
+  v.setUint32(4,36+bytes,true);
+  str(8,'WAVE');
+  str(12,'fmt ');
+  v.setUint32(16,16,true);
+  v.setUint16(20,1,true);
+  v.setUint16(22,nc,true);
+  v.setUint32(24,sr,true);
+  v.setUint32(28,sr*nc*2,true);
+  v.setUint16(32,nc*2,true);
+  v.setUint16(34,16,true);
+  str(36,'data');
+  v.setUint32(40,bytes,true);
+
+  let o=44;
+  for (let i=0; i<n; i++) {
+    for (let c=0; c<nc; c++) {
+      const s=channels[c][i];
+      v.setInt16(o,s<0?s*32768:s*32767,true);
+      o+=2;
+    }
+  }
+
+  return new Blob([ab],{type:'audio/wav'});
+}
+
+function mp3(channels,sr) {
+  if (!window.lamejs) throw Error('MP3 encoder unavailable. Check your connection and reload the page.');
+  const supported=[44100,48000,32000,24000,22050,16000,12000,11025,8000];
+  if (!supported.includes(sr)) throw Error('Unsupported sample rate for MP3. Choose WAV instead.');
+
+  const enc=new lamejs.Mp3Encoder(channels.length,sr,192);
+  const cv=a => {
+    const b=new Int16Array(a.length);
+    for (let i=0; i<a.length; i++) b[i]=a[i]<0?a[i]*32768:a[i]*32767;
+    return b;
+  };
+
+  const left=cv(channels[0]);
+  const right=channels.length>1 ? cv(channels[1]) : null;
+  const out=[];
+
+  for (let i=0; i<left.length; i+=1152) {
+    const b=channels.length>1
+      ? enc.encodeBuffer(left.subarray(i,i+1152),right.subarray(i,i+1152))
+      : enc.encodeBuffer(left.subarray(i,i+1152));
+    if (b.length) out.push(b);
+  }
+
+  const tail=enc.flush();
+  if (tail.length) out.push(tail);
+  return new Blob(out,{type:'audio/mpeg'});
+}
+
+function download(blob,name) {
+  if (lastURL) URL.revokeObjectURL(lastURL);
+  lastURL=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=lastURL;
+  a.download=name;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  const url=lastURL;
+  setTimeout(() => {
+    URL.revokeObjectURL(url);
+    if (lastURL===url) lastURL=null;
+  },60000);
+}
+
+$('export').addEventListener('click',async() => {
+  if (!audioBuffer || recording) return;
+  if ($('format').value==='video') {
+    await play(true);
+    return;
+  }
+
+  $('export').disabled=true;
+  progress.style.width='15%';
+  say('Preparing audio export…');
+
+  try {
+    await new Promise(resolve => setTimeout(resolve,25));
+    const x=samples();
+    progress.style.width='65%';
+    const format=$('format').value;
+    const blob=format==='wav' ? wav(x.channels,x.sr) : mp3(x.channels,x.sr);
+    download(blob,`${fileBase}_${Math.round(x.d)}s.${format}`);
+    progress.style.width='100%';
+    say('Export complete. Check your Downloads folder.');
+  } catch (e) {
+    say(e.message || 'Export failed.');
+    progress.style.width='0%';
+  } finally {
+    $('export').disabled=!audioBuffer || recording;
+  }
 });
-resizeCanvas();drawWave();
+
+window.addEventListener('beforeinstallprompt',e => {
+  e.preventDefault();
+  installPrompt=e;
+  $('install').hidden=false;
+});
+
+$('install').addEventListener('click',async() => {
+  if (!installPrompt) return;
+  try {
+    await installPrompt.prompt();
+    await installPrompt.userChoice;
+  } catch (e) {
+    say('App installation is unavailable right now.');
+  }
+  installPrompt=null;
+  $('install').hidden=true;
+});
+
+if ('serviceWorker' in navigator && location.protocol!=='file:') {
+  window.addEventListener('load',() => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
+
+window.addEventListener('beforeunload',() => {
+  stop();
+  stream?.getTracks().forEach(t => t.stop());
+  if (lastURL) URL.revokeObjectURL(lastURL);
+});
+
+resizeCanvas();
+drawWave();
 })();
 </script>
+
 </body>
 </html>
