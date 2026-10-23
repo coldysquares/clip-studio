@@ -1,0 +1,21 @@
+
+{
+  "id": "./",
+  "name": "Clip Studio — Audio & Visualizer",
+  "short_name": "Clip Studio",
+  "description": "Trim audio clips and create reactive visualizer videos.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0a0b10",
+  "theme_color": "#0a0b10",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
