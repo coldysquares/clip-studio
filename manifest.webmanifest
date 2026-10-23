@@ -1,8 +1,8 @@
 
 {
   "id": "./",
-  "name": "Clip Studio — Audio & Visualizer",
-  "short_name": "Clip Studio",
+  "name": "Clipwave Studio — Audio & Visualizer",
+  "short_name": "Clipwave Studio",
   "description": "Trim audio clips and create reactive visualizer videos.",
   "start_url": "./",
   "scope": "./",
